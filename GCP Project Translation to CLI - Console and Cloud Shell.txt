@@ -1,0 +1,136 @@
+Lab Title: Console and Cloud Shell
+Url: https://googlepluralsight.qwiklabs.com/focuses/10999384?parent=lti_session
+
+Objectives
+The objectives of this lab are;
+
+1. Get access to Google Cloud.
+2. Create a Cloud Storage bucket using the Cloud Console.
+3. Create a Cloud Storage bucket using Cloud Shell.
+4. Become familiar with Cloud Shell features.
+
+Task 1: Create a bucket using the Cloud Console
+Steps
+Create a bucket with a unique name.
+
+gsutil mb gs://unique_bucket1
+
+
+Step 2: Access Cloud Shell
+In this section, we explore Cloud Shell and some of its features.
+
+One can use the Cloud Shell to manage projects and resources via command line, without having to install the Cloud SDK and other tools on your computer.
+
+Cloud shell provides the following:
+
+Temporary Compute Engine VM
+Command-line access to the instance via a browser
+5 GB of persistent disk storage ($HOME dir)
+Pre-installed Cloud SDK and other tools
+gcloud: for working with Google Compute Engine and many Google Cloud services
+gsutil: for working with Cloud Storage
+kubectl: for working with Google Container Engine and Kubernetes
+bq: for working with BigQuery
+Language support for Java, Go, Python, Node.js, PHP, and Ruby
+Web preview functionality
+Built-in authorization for access to resources and instances
+
+
+Task 3: Create a bucket using Cloud Shell
+Create a second bucket and verify in the Cloud Console
+
+gsutil mb gs://unique_bucket2
+
+Task 4: Explore more Cloud Shell features
+Upload a file
+Open Cloud Shell
+
+Upload any file from your local machine to the Cloud Shell VM. This file will be referred to as sample_gcp_file.
+
+In Cloud Shell, type ls to confirm that the file was uploaded.
+
+Copy the file into one of the buckets you created earlier in the lab. Replace sample_gcp_file with the file you uploaded and unique_bucket2 with one of your bucket names:
+
+gsutil cp sample_gcp_file gs://unique_bucket2
+
+
+Task 5: Create a persistent state in Cloud Shell
+Identify available regions
+
+To list available regions, execute the following command:
+
+gcloud compute regions list
+
+Create and verify an environment variable
+Create an environment variable and replace 14 with the region you selected in the previous step:
+
+INFRACLASS_REGION=14
+
+Verify it with echo:
+
+echo $INFRACLASS_REGION
+
+
+Append the environment variable to a file
+Create a subdirectory for materials used in this class:
+
+mkdir infraclass
+
+Create a file called config in the infraclass directory:
+
+touch infraclass/config
+
+Append the value of the Region environment variable to the config file:
+
+echo INFRACLASS_REGION=$INFRACLASS_REGION >> ~/infraclass/config
+
+Create a second environment variable for your Project ID, replacing qwiklabs-gcp-02-cee297e50340 with your Project ID. You can find the project ID on the Cloud Console Home page.
+
+INFRACLASS_PROJECT_ID=qwiklabs-gcp-02-cee297e50340
+
+Append the value of your Project ID environment variable to the config file:
+
+echo INFRACLASS_PROJECT_ID=$INFRACLASS_PROJECT_ID >> ~/infraclass/config
+
+Use the source command to set the environment variables, and use the echo command to verify that the project variable was set:
+
+source infraclass/config
+echo $INFRACLASS_PROJECT_ID
+
+
+Close and re-open Cloud Shell. Then issue the echo command again:
+
+echo $INFRACLASS_PROJECT_ID
+
+
+Modify the bash profile and create persistence
+Edit the shell profile with the following command:
+
+nano .profile
+
+Add the following line to the end of the file:
+
+source infraclass/config
+
+Press Ctrl+O, ENTER to save the file, and then press Ctrl+X to exit nano.
+
+Close and then re-open Cloud Shell to cycle the VM.
+
+Use the echo command to verify that the variable is still set:
+
+echo $INFRACLASS_PROJECT_ID
+
+
+Task 6: Review the Google Cloud interface
+The Google Cloud interface consists of two parts: the Cloud Console and Cloud Shell.
+
+The Console:
+
+Provides a fast way to get things done
+Presents options to you, instead of requiring you to know them
+Performs behind-the-scenes validation before submitting the commands
+Cloud Shell provides:
+
+Detailed control
+Complete range of options and features
+A path to automation through scripting
